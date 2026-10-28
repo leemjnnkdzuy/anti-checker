@@ -9,6 +9,7 @@ let mainWindow: BrowserWindow | null = null
 
 function createWindow(): void {
   const win = new BrowserWindow({
+    title: 'Anti-Checker',
     width: 1280,
     height: 720,
     minWidth: 1280,
@@ -16,7 +17,7 @@ function createWindow(): void {
     show: false,
     backgroundColor: '#000000',
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -38,7 +39,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.antichecker.app')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
