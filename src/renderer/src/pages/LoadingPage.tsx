@@ -141,24 +141,29 @@ export function LoadingPage() {
         <div className="w-full space-y-2.5">
           {/* Text trên 2 đầu thanh process */}
           <div className="flex items-center justify-between text-xs font-medium">
-            <div className="flex items-center gap-1.5 text-neutral-300 truncate max-w-[270px]">
+            <div className="flex items-center gap-1.5 text-neutral-200 truncate max-w-[270px]">
               {getStepIcon()}
               <span className="truncate">{message}</span>
             </div>
-            <span className="font-mono text-neutral-400 text-xs shrink-0 pl-2">
+            <span className="font-mono text-neutral-200 font-semibold text-xs shrink-0 pl-2">
               {error ? 'Lỗi' : `${progress}%`}
             </span>
           </div>
 
-          {/* Thanh Progress bar */}
-          <Progress value={progress} className="h-1.5 w-full bg-neutral-900 border border-neutral-800/80" />
+          {/* Thanh Progress bar: Tông trung tính sáng màu */}
+          <Progress
+            value={progress}
+            className="w-full"
+            trackClassName="h-2 w-full bg-neutral-800/90 rounded-full overflow-hidden"
+            indicatorClassName="bg-neutral-100 shadow-[0_0_10px_rgba(255,255,255,0.35)]"
+          />
 
           {/* Dưới thanh process: Tốc độ tải hoặc thông tin lỗi */}
           <div className="min-h-[22px] text-[11px] font-mono text-neutral-400">
             {speedText && !error && (
-              <div className="flex items-center justify-between animate-fadeIn text-neutral-400">
+              <div className="flex items-center justify-between text-neutral-400">
                 <span>{speedText}</span>
-                <span className="text-blue-400/90 text-[10px]">Tự động cập nhật</span>
+                <span className="text-neutral-300 text-[10px]">Tự động tải</span>
               </div>
             )}
 

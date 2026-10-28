@@ -3,22 +3,29 @@
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
 import { cn } from "cn"
 
+interface ProgressProps extends ProgressPrimitive.Root.Props {
+  trackClassName?: string
+  indicatorClassName?: string
+}
+
 function Progress({
   className,
+  trackClassName,
+  indicatorClassName,
   children,
   value,
   ...props
-}: ProgressPrimitive.Root.Props) {
+}: ProgressProps) {
   return (
     <ProgressPrimitive.Root
       value={value}
       data-slot="progress"
-      className={cn("flex flex-wrap gap-3", className)}
+      className={cn("w-full", className)}
       {...props}
     >
       {children}
-      <ProgressTrack>
-        <ProgressIndicator />
+      <ProgressTrack className={trackClassName}>
+        <ProgressIndicator className={indicatorClassName} />
       </ProgressTrack>
     </ProgressPrimitive.Root>
   )
@@ -28,7 +35,7 @@ function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
   return (
     <ProgressPrimitive.Track
       className={cn(
-        "relative flex h-3 w-full items-center overflow-x-hidden rounded-4xl bg-muted",
+        "relative flex h-2 w-full items-center overflow-hidden rounded-full bg-neutral-800",
         className
       )}
       data-slot="progress-track"
@@ -44,7 +51,7 @@ function ProgressIndicator({
   return (
     <ProgressPrimitive.Indicator
       data-slot="progress-indicator"
-      className={cn("h-full bg-primary transition-all", className)}
+      className={cn("h-full bg-neutral-100 rounded-full transition-all duration-300 ease-out", className)}
       {...props}
     />
   )
